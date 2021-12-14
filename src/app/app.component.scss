@@ -1,0 +1,26 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-toolbar.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+main {
+  margin-top: 64px;
+  flex: 1 0 auto;
+}
+
+mat-toolbar.footer {
+  display: flex;
+  justify-content: center;
+}
