@@ -14,7 +14,130 @@
             <span class="tab-label-text">Create</span>
           </ng-template>
           <div class="tab-content">
-            <mat-icon>add</mat-icon>
+            <form
+              (ngSubmit)="onCreateSubmit()"
+              #createForm="ngForm"
+              class="create"
+            >
+              <div id="fields">
+                <div id="left">
+                  <mat-form-field>
+                    <mat-label>Full Name</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="text"
+                      name="name"
+                      [(ngModel)]="fireArm.name"
+                      #name="ngModel"
+                    />
+                    <mat-error *ngIf="name.errors?.['required']"
+                      >Full Name is required.</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input
+                      matInput
+                      required
+                      name="dob"
+                      [(ngModel)]="fireArm.dob"
+                      #dob="ngModel"
+                      #pickerInput
+                      [matDatepicker]="picker"
+                      (focus)="picker.open()"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                      tabindex="-1"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker
+                      #picker
+                      (closed)="pickerInput.blur()"
+                    ></mat-datepicker>
+                    <mat-error *ngIf="dob.errors?.['required']"
+                      >Date of Birth is required.</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>State of Origin</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="text"
+                      name="state"
+                      [(ngModel)]="fireArm.state"
+                      #state="ngModel"
+                    />
+                    <mat-error *ngIf="state.errors?.['required']"
+                      >State of Origin is required.</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+                <div id="right">
+                  <mat-form-field>
+                    <mat-label>NIN</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="text"
+                      name="nin"
+                      pattern="^\d{11}$"
+                      [(ngModel)]="fireArm.nin"
+                      #nin="ngModel"
+                    />
+                    <mat-error *ngIf="nin.errors?.['required']"
+                      >NIN is required.</mat-error
+                    >
+                    <mat-error *ngIf="nin.errors?.['pattern']"
+                      >NIN must be 11 digits.</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Gun Serial Number</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="text"
+                      name="gun"
+                      [(ngModel)]="fireArm.gun"
+                      #gun="ngModel"
+                    />
+                    <mat-error *ngIf="gun.errors?.['required']"
+                      >Gun Serial Number is required.</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Bullet Serial Number</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="text"
+                      name="bullet"
+                      [(ngModel)]="fireArm.bullet"
+                      #bullet="ngModel"
+                    />
+                    <mat-error *ngIf="bullet.errors?.['required']"
+                      >Bullet Serial Number is required.</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+              </div>
+              <p class="text-center">
+                <button
+                  mat-ripple
+                  mat-raised-button
+                  type="submit"
+                  aria-label="Create Fire Arm"
+                  color="primary"
+                  [disabled]="!createForm.form.valid"
+                  id="createButton"
+                >
+                  <span>Create Fire Arm</span>
+                </button>
+              </p>
+            </form>
           </div>
         </mat-tab>
 

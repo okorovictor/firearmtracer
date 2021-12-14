@@ -1,8 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+export class FireArm {
+  constructor(
+    public name: string,
+    public dob: string,
+    public state: string,
+    public nin: string,
+    public gun: string,
+    public bullet: string
+  ) {}
+}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  fireArm = new FireArm('', '', '', '', '', '');
+  @ViewChild('createForm') createForm: NgForm | undefined;
+
+  constructor(private snackBar: MatSnackBar) { }
+
+  async onCreateSubmit(): Promise<void> {
+    try {
+      console.log(this.fireArm);
+      this.snackBar.open('Fire Arm successfully created.', '', {
+        panelClass: ['snackbar-success']
+      });
+      this.createForm?.resetForm();
+      this.fireArm = new FireArm('', '', '', '', '', '');
+    } catch (error) {
+      console.error(error);
+      this.snackBar.open(`${error}`, '', {
+        panelClass: ['snackbar-error']
+      });
+    }
+  }
+}
