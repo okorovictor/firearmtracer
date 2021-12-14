@@ -1,3 +1,16 @@
+mat-toolbar.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media (min-width: 1400px) {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
 mat-sidenav-container {
   height: 100%;
 }
@@ -14,24 +27,41 @@ mat-sidenav-content {
   }
 }
 
-mat-toolbar.header {
-  position: fixed;
-  top: 0;
+main {
+  margin-top: 64px;
+  flex: 1 0 auto;
+
+  @media (max-width: 600px) {
+    margin-top: 56px;
+  }
+}
+
+:host ::ng-deep .mat-tab-header {
+  position: fixed !important;
+  z-index: 10;
+  background-color: white;
   left: 0;
   right: 0;
 
-   @media (min-width: 1400px) {
+  @media (min-width: 1400px) {
     max-width: 1400px;
     margin: 0 auto;
   }
 }
 
-main {
-  margin-top: 64px;
-  flex: 1 0 auto;
+.tab-label-text {
+  display: inline-block;
+  margin-left: 8px;
+  font-weight: bold;
 }
 
-mat-toolbar.footer {
+.tab-content {
+  height: 1000px;
+  margin-top: 48px;
+  padding: 32px;
+}
+
+mat-toolbar.footer mat-toolbar-row {
   display: flex;
   justify-content: center;
 }

@@ -1,13 +1,49 @@
+<mat-toolbar color="primary" class="header mat-elevation-z2">
+  <mat-toolbar-row>
+    <span>Fire Arm Tracer</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <mat-sidenav-container>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="header mat-elevation-z2">
-      <span>Fire Arm Tracer</span>
-    </mat-toolbar>
+    <main>
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab>
+          <ng-template matTabLabel>
+            <mat-icon>add</mat-icon>
+            <span class="tab-label-text">Create</span>
+          </ng-template>
+          <div class="tab-content">
+            <mat-icon>add</mat-icon>
+          </div>
+        </mat-tab>
 
-    <main></main>
+        <mat-tab>
+          <ng-template matTabLabel>
+            <mat-icon>search</mat-icon>
+            <span class="tab-label-text">Search</span>
+          </ng-template>
+          <div class="tab-content">
+            <mat-icon>search</mat-icon>
+          </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template matTabLabel>
+            <mat-icon>list</mat-icon>
+            <span class="tab-label-text">List</span>
+          </ng-template>
+          <div class="tab-content">
+            <mat-icon>list</mat-icon>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </main>
 
     <mat-toolbar class="footer mat-elevation-z2">
-      <small>&copy; 2021, Fire Arm Tracer.</small>
+      <mat-toolbar-row>
+        <small>&copy; 2021, Fire Arm Tracer.</small>
+      </mat-toolbar-row>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
