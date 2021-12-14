@@ -114,6 +114,14 @@ mat-divider {
   padding: 32px 0;
 }
 
+table {
+  width: 100%;
+}
+
+td[mat-cell] {
+  min-width: 144px;
+}
+
 mat-toolbar.footer mat-toolbar-row {
   display: flex;
   justify-content: center;
