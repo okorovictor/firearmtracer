@@ -6,6 +6,12 @@ mat-sidenav-content {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @media (min-width: 1400px) {
+    max-width: 1400px;
+    border: 5px solid;
+    margin: 0 auto;
+  }
 }
 
 mat-toolbar.header {
@@ -13,6 +19,11 @@ mat-toolbar.header {
   top: 0;
   left: 0;
   right: 0;
+
+   @media (min-width: 1400px) {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }
 
 main {
