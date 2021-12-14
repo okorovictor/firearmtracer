@@ -13,6 +13,10 @@ export class FireArm {
   ) {}
 }
 
+export class Search {
+  constructor(public bullet: string) {}
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,9 +24,12 @@ export class FireArm {
 })
 export class AppComponent {
   fireArm = new FireArm('', '', '', '', '', '');
+  search = new Search('');
+  searching = false;
   @ViewChild('createForm') createForm: NgForm | undefined;
+  @ViewChild('searchForm') searchForm: NgForm | undefined;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {}
 
   async onCreateSubmit(): Promise<void> {
     try {
@@ -32,6 +39,18 @@ export class AppComponent {
       });
       this.createForm?.resetForm();
       this.fireArm = new FireArm('', '', '', '', '', '');
+    } catch (error) {
+      console.error(error);
+      this.snackBar.open(`${error}`, '', {
+        panelClass: ['snackbar-error']
+      });
+    }
+  }
+
+  async onSearchSubmit(): Promise<void> {
+    try {
+      console.log(this.search);
+      this.searching = true;
     } catch (error) {
       console.error(error);
       this.snackBar.open(`${error}`, '', {

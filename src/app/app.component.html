@@ -14,11 +14,7 @@
             <span class="tab-label-text">Create</span>
           </ng-template>
           <div class="tab-content">
-            <form
-              (ngSubmit)="onCreateSubmit()"
-              #createForm="ngForm"
-              class="create"
-            >
+            <form (ngSubmit)="onCreateSubmit()" #createForm="ngForm">
               <div id="fields">
                 <div id="left">
                   <mat-form-field>
@@ -147,7 +143,48 @@
             <span class="tab-label-text">Search</span>
           </ng-template>
           <div class="tab-content">
-            <mat-icon>search</mat-icon>
+            <p class="text-center">
+              Enter a bullet's serial number to trace about its fire arm.
+            </p>
+
+            <form
+              (ngSubmit)="onSearchSubmit()"
+              #searchForm="ngForm"
+              class="search"
+            >
+              <mat-form-field appearance="outline" class="search">
+                <mat-label>Bullet Serial Number</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  required
+                  [(ngModel)]="search.bullet"
+                  name="bullet"
+                  #bullet="ngModel"
+                  (input)="searching = false"
+                />
+                <mat-error *ngIf="bullet.errors?.['required']">
+                  Bullet Serial Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <p>
+                <button
+                  mat-raised-button
+                  type="submit"
+                  [disabled]="!searchForm.form.valid || searching"
+                  #submit
+                >
+                  Trace
+                </button>
+              </p>
+            </form>
+
+            <mat-divider></mat-divider>
+
+            <div id="spinner" *ngIf="searching">
+              <mat-spinner></mat-spinner>
+            </div>
           </div>
         </mat-tab>
 

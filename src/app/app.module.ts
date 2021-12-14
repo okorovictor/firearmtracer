@@ -5,8 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {
   MatSnackBarModule,
@@ -26,8 +28,10 @@ import { AppComponent } from './app.component';
     MatButtonModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatDividerModule,
     MatInputModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTabsModule,
