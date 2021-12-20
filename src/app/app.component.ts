@@ -1,11 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { firstValueFrom } from 'rxjs';
 
 export class FireArm {
   constructor(
     public name: string,
-    public dob: string,
+    public dob: any,
     public state: string,
     public nin: string,
     public gun: string,
@@ -17,14 +19,6 @@ export class Search {
   constructor(public bullet: string) {}
 }
 
-const FIREARMS: FireArm[] = [
-  new FireArm('Person1', '2000-01-01', 'Abia', '10000000001', 'AE00', 'AE001'),
-  new FireArm('Person2', '2000-02-01', 'Adam', '10000000001', 'AE00', 'AE001'),
-  new FireArm('Person3', '2000-03-01', 'Anam', '10000000001', 'AE00', 'AE001'),
-  new FireArm('Person4', '2000-04-01', 'Delt', '10000000001', 'AE00', 'AE001'),
-  new FireArm('Person5', '2000-05-01', 'Ebon', '10000000001', 'AE00', 'AE001')
-];
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -34,16 +28,23 @@ export class AppComponent {
   fireArm = new FireArm('', '', '', '', '', '');
   search = new Search('');
   searching = false;
-  dataSource = FIREARMS;
+  dataSource: FireArm[] = [];
   displayedColumns = ['name', 'dob', 'state', 'nin', 'gun', 'bullet'];
   @ViewChild('createForm') createForm: NgForm | undefined;
   @ViewChild('searchForm') searchForm: NgForm | undefined;
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   async onCreateSubmit(): Promise<void> {
     try {
-      console.log(this.fireArm);
+      const [y, m, d] = this.fireArm.dob.toISOString().split('T')[0].split('-');
+      this.fireArm.dob = `${m}-${d}-${y}`;
+      const fireArm = JSON.parse(JSON.stringify(this.fireArm));
+      const formData = new FormData();
+      for (const key in this.fireArm) {
+        formData.append(key, fireArm[key]);
+      }
+      await firstValueFrom(this.http.post('/create/', formData));
       this.snackBar.open('Fire Arm successfully created.', '', {
         panelClass: ['snackbar-success']
       });
@@ -51,7 +52,7 @@ export class AppComponent {
       this.fireArm = new FireArm('', '', '', '', '', '');
     } catch (error) {
       console.error(error);
-      this.snackBar.open(`${error}`, '', {
+      this.snackBar.open(`${(error as { message: string }).message}`, '', {
         panelClass: ['snackbar-error']
       });
     }
@@ -59,8 +60,11 @@ export class AppComponent {
 
   async onSearchSubmit(): Promise<void> {
     try {
-      console.log(this.search);
       this.searching = true;
+      this.dataSource = (await firstValueFrom(
+        this.http.get(`/results/${this.search.bullet}/`)
+      )) as FireArm[];
+      this.searching = false;
     } catch (error) {
       console.error(error);
       this.snackBar.open(`${error}`, '', {
