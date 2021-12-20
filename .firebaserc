@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "obumnwabudee"
+  },
+  "targets": {
+    "obumnwabudee": {
+      "hosting": {
+        "firearmtracer": [
+          "firearmtracer"
+        ]
+      }
+    }
+  }
+}
