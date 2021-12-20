@@ -1,0 +1,10 @@
+{
+  "/create": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/results": {
+    "target": "http://localhost:5000",
+    "secure": false
+  }
+}
